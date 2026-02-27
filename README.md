@@ -1,8 +1,10 @@
-# Dockerized Flask Store App on Azure
+# Dockerized Flask Store App on Azure  
 
 ![Dockerized Flask](Images/dockerized-Flask.png)
 
-This repository hosts a **Dockerized Flask web store application** deployed on **Azure Container Apps**. The application demonstrates a lightweight, containerized Python web app running in the cloud, suitable for e-commerce demos or small-scale store prototypes.
+This repository hosts a **Dockerized Flask web store application** deployed on **Azure Container Apps**.  
+
+The project demonstrates how to containerize a lightweight Python web application and deploy it to the cloud, making it suitable for e-commerce demos or small-scale store prototypes.
 
 ---
 
@@ -11,19 +13,20 @@ This repository hosts a **Dockerized Flask web store application** deployed on *
 - **Framework:** Flask 2.3.3  
 - **Server:** Gunicorn (production-ready WSGI server)  
 - **Containerization:** Docker  
-- **Cloud Deployment:** Azure Container Apps (with managed environment)
-  ![Azure Deployment](Images/Azure_flask.png)
+- **Cloud Deployment:** Azure Container Apps (managed environment)
 
-The app exposes a web interface for browsing products and simulates an online store experience, running entirely in a Docker container.
+![Azure Deployment](Images/Azure_flask.png)
+
+The application provides a web interface for browsing products and simulates an online store experience, running entirely inside a Docker container.
 
 ---
 
 ## Docker Setup
 
-**Dockerfile:**
+### Dockerfile
 
 ```dockerfile
-# Use stable Python image
+# Use a stable Python base image
 FROM python:3.12-slim
 
 # Set working directory
@@ -35,27 +38,30 @@ COPY . /app
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose port (default for Flask)
+# Expose application port
 EXPOSE 5000
 
-# Run app with Gunicorn
+# Run the app with Gunicorn
 CMD ["gunicorn", "app:app", "--bind", "0.0.0.0:5000"]
+```
 
 ---
 
 ## Conclusion: Benefits of Dockerized Deployment
 
-Using Docker to containerize the Flask store app brings several key benefits:
+Containerizing the Flask store application with Docker provides several strategic advantages:
 
-- **Portability:** The app runs consistently across all environments (local, staging, production) without configuration issues.
-- **Reproducibility:** All dependencies and environment settings are encapsulated, eliminating “it works on my machine” problems.
-- **Scalability:** Containers can be easily replicated or orchestrated on platforms like Azure Container Apps for load handling.
-- **Efficiency for Teams:** Developers can spin up a new instance of the app without manually setting up Python, Flask, Gunicorn, or dependencies.
+- **Portability:** The application runs consistently across local, staging, and production environments without configuration conflicts.
+- **Reproducibility:** All dependencies and environment configurations are encapsulated within the container, eliminating the classic *“it works on my machine”* issue.
+- **Scalability:** Containers can be easily replicated and orchestrated on platforms like Azure Container Apps to handle increased traffic and load.
+- **Team Efficiency:** Developers can spin up a fully configured environment without manually installing Python, Flask, Gunicorn, or dependencies.
 
-**Estimated time savings:**  
+### Estimated Time Savings
 
-- Manually setting up a team environment (installing Python, Flask, dependencies, configuring servers) can take **2–4 hours per developer**.  
-- Using Docker, this process is reduced to **less than 10–15 minutes**, saving roughly **85–90% of setup time**.  
-- This allows teams to focus more on development, testing, and feature delivery instead of environment setup.
+- Manual environment setup typically takes **2–4 hours per developer**.
+- With Docker, setup time is reduced to **10–15 minutes**.
+- This represents an estimated **85–90% reduction in setup time**.
 
-> Overall, Docker drastically reduces deployment friction, standardizes the workflow, and accelerates collaboration in a team environment.
+This efficiency enables teams to focus on development, testing, and feature delivery instead of environment configuration.
+
+> Overall, Docker significantly reduces deployment friction, standardizes workflows, and accelerates collaboration within development teams.
